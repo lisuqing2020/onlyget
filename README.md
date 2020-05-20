@@ -2,7 +2,7 @@
 
 ## 使用方法
 1. 拷贝build/onlyget到你的http服务根目录
-2. ./onlyget即可启动http服务
+2. ./onlyget即可启动http服务，端口8080
 3. 只支持get请求，非get会返回403 Forbidden
 
 ## 源码模块
