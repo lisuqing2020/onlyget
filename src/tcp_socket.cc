@@ -78,6 +78,7 @@ string TcpSocket::Recv(int timeout) {
         return string(buf);
     } else {
         // select出错...
+        cout << "select error\n";
     }
 }
 

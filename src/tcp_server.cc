@@ -2,6 +2,8 @@
 
 TcpServer::TcpServer() {
     monitor_ = socket(AF_INET, SOCK_STREAM, 0);
+    int opt = 1;
+    setsockopt(monitor_, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt));
 }
 
 void TcpServer::Listen(unsigned short port) {
@@ -30,6 +32,7 @@ TcpSocket* TcpServer::Accept(int& r, int timeout) {
         r = 0;
         return new TcpSocket(socket);
     } else {
+        cout << "select error\n";
         // select出错...
     }
 }

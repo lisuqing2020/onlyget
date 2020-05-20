@@ -1,5 +1,14 @@
-client:
-	g++ -std=c++11 client.cc src/tcp_socket.cc -Iinclude -o build/client
+src = $(wildcard src/*.cc)
+obj = $(patsubst src/%.cc, build/%.o, $(src))
+tar = build/onlyget
+ccc = g++ -std=c++11
 
-server:
-	g++ -std=c++11 server.cc src/tcp_socket.cc src/tcp_server.cc src/http.cc -Iinclude -lpthread -o build/server
+$(tar):$(obj)
+	$(ccc) $(obj) -o $(tar) -Iinclude -lpthread
+
+build/%.o:src/%.cc
+	$(ccc) -c $< -o $@ -Iinclude
+
+.PHONY:clean
+clean:
+	rm -f build/*.o
